@@ -4,11 +4,29 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        //Creates an object of the Counter class
+        Counter counter = new Counter();
+
+        //display initial values
+        System.out.println("Initial total: " + counter.currentTotal());
+        System.out.println("Count overflow: " + counter.getCountOverflow());
+
+        counter.hundredths();
+        counter.tens();
+        counter.ones();
+        counter.ones();
+
+        System.out.println("Current total: " + counter.currentTotal());
+        System.out.println("Count overflow: " + counter.getCountOverflow());
+
+        // Reset the counter
+        counter.resetCounter();
+        System.out.println("Counter reset.");
+        System.out.println("Current total after reset: " + counter.currentTotal());
+        System.out.println("Count overflow after reset: " + counter.getCountOverflow());
+
+
     }
 }
