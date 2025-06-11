@@ -3,6 +3,8 @@
  */
 package org.example;
 
+import org.example.GroceryCounterClass.Counter;
+
 public class App {
 
     public static void main(String[] args) {
