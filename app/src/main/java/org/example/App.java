@@ -13,6 +13,8 @@ public class App {
         System.out.println("Initial total: " + counter.currentTotal());
         System.out.println("Count overflow: " + counter.getCountOverflow());
 
+
+        // Expected output: $12.01
         counter.hundredths();
         counter.tens();
         counter.ones();
