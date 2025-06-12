@@ -1,10 +1,12 @@
-public GroceryCounterClass {
+package org.example;
+
+public class GroceryCounterClass {
     private int digits[];
 
     private int count_overflow;
 
     //Constructor for GroceryCounter
-    public GroceryCounterConstructor() {
+    public GroceryCounterClass() {
         this.digits = new int[4];
         this.count_overflow = 0;
     }
@@ -40,35 +42,34 @@ public GroceryCounterClass {
 
     //first digit 
     public void tens(){
-        CountAction(1);
+        CountAction(0);
     }
 
     //second digit
     public void ones(){ 
-        CountAction(2);
+        CountAction(1);
     }
 
     //third digit
     public void tenths(){
-        CountAction(3);
+        CountAction(2);
     }
 
     //fourth digit
     public void hundredths(){
-        CountAction(4);
+        CountAction(3);
     }
 
     //method to display the current total in a formatted string
     public String currentTotal() {
-        int firstDigit = digits[0];
-        int secondDigit = digits[1];
-        int thirdDigit = digits[2];
-        int fourthDigit = digits[3];
+        int tens = digits[0]; //$10 bills
+        int ones = digits[1]; //$1 bills
+        int tenths = digits[2]; //10 cents
+        int hundredths = digits[3]; //1 cent 
 
-        if (firstDigit == 0) {
-            return String.format("$%d.%d%d", secondDigit, thirdDigit, fourthDigit);
-        } else {
-            return String.format("$%d.%d%d", firstDigit, secondDigit, thirdDigit, fourthDigit);
-        }
+        int dollars = tens * 10 + ones; //00.
+        int cents = tenths * 10 + hundredths; //.00
+
+        return String.format("$%d.%02d", dollars, cents);
     }
 }
