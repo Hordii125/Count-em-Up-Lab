@@ -6,5 +6,63 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
+public class AppTest {
+
+    GroceryCounterClass counter;
+
+    @BeforeEach
+    public void setUp() {
+        counter = new GroceryCounterClass();
+    }
+
+    @Test
+    public void testInitialTotalIsZero() {
+        assertEquals("$0.00", counter.currentTotal());
+        assertEquals(0, counter.getCountOverflow());
+    }
+
+    @Test
+    public void testIncrementEachDigitOnce() {
+        counter.tens();        // +10
+        counter.ones();        // +1
+        counter.tenths();      // +0.10
+        counter.hundredths();  // +0.01
+
+        assertEquals("$11.11", counter.currentTotal());
+        assertEquals(0, counter.getCountOverflow());
+    }
+
+    @Test
+    public void testOverflow() {
+        // force counter to overflow
+        for (int i = 0; i < 9; i++) counter.tens();      
+        for (int i = 0; i < 9; i++) counter.ones();        
+        for (int i = 0; i < 9; i++) counter.tenths();      
+        for (int i = 0; i < 10; i++) counter.hundredths();  
+
+        assertEquals("$0.00", counter.currentTotal());
+        assertEquals(1, counter.getCountOverflow());
+    }
+
+    @Test
+    public void testResetCounter() {
+        counter.tens();
+        counter.ones();
+        counter.tenths();
+        counter.hundredths();
+        counter.resetCounter();
+
+        assertEquals("$0.00", counter.currentTotal());
+        assertEquals(0, counter.getCountOverflow());
+    }
+
+    @Test
+    public void testRandom() {
+        // e.g. $60.92
+        for (int i = 0; i < 6; i++) counter.tens();
+        for (int i = 0; i < 9; i++) counter.tenths();
+        for (int i = 0; i < 2; i++) counter.hundredths();
+
+        assertEquals("$60.92", counter.currentTotal());
+    }
 }
